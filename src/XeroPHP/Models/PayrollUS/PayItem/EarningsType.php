@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS\PayItem;
 
 use XeroPHP\Remote;
 
 class EarningsType extends Remote\Model
 {
-
     /**
      * Name of the earnings type (max length = 100)
      *
@@ -88,20 +88,20 @@ class EarningsType extends Remote\Model
 
 
     const RATETYPE_FIXEDAMOUNT = 'FIXEDAMOUNT';
-    const RATETYPE_MULTIPLE    = 'MULTIPLE';
+    const RATETYPE_MULTIPLE = 'MULTIPLE';
     const RATETYPE_RATEPERUNIT = 'RATEPERUNIT';
 
-    const EARNINGSCATEGORY_REGULAR_EARNINGS       = 'REGULAR EARNINGS';
-    const EARNINGSCATEGORY_OVERTIMEEARNINGS       = 'OVERTIMEEARNINGS';
-    const EARNINGSCATEGORY_ALLOWANCE              = 'ALLOWANCE';
-    const EARNINGSCATEGORY_COMMISSION             = 'COMMISSION';
-    const EARNINGSCATEGORY_BONUS                  = 'BONUS';
-    const EARNINGSCATEGORY_CASHTIPS               = 'CASHTIPS';
-    const EARNINGSCATEGORY_NONCASHTIPS            = 'NONCASHTIPS';
-    const EARNINGSCATEGORY_ADDITIONALEARNINGS     = 'ADDITIONALEARNINGS';
-    const EARNINGSCATEGORY_RETROACTIVEPAY         = 'RETROACTIVEPAY';
+    const EARNINGSCATEGORY_REGULAR_EARNINGS = 'REGULAR EARNINGS';
+    const EARNINGSCATEGORY_OVERTIMEEARNINGS = 'OVERTIMEEARNINGS';
+    const EARNINGSCATEGORY_ALLOWANCE = 'ALLOWANCE';
+    const EARNINGSCATEGORY_COMMISSION = 'COMMISSION';
+    const EARNINGSCATEGORY_BONUS = 'BONUS';
+    const EARNINGSCATEGORY_CASHTIPS = 'CASHTIPS';
+    const EARNINGSCATEGORY_NONCASHTIPS = 'NONCASHTIPS';
+    const EARNINGSCATEGORY_ADDITIONALEARNINGS = 'ADDITIONALEARNINGS';
+    const EARNINGSCATEGORY_RETROACTIVEPAY = 'RETROACTIVEPAY';
     const EARNINGSCATEGORY_CLERGYHOUSINGALLOWANCE = 'CLERGYHOUSINGALLOWANCE';
-    const EARNINGSCATEGORY_CLERGYHOUSINGINKIND    = 'CLERGYHOUSINGINKIND';
+    const EARNINGSCATEGORY_CLERGYHOUSINGINKIND = 'CLERGYHOUSINGINKIND';
 
 
     /**
@@ -182,7 +182,7 @@ class EarningsType extends Remote\Model
             'Multiple' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'DoNotAccrueTimeOff' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'IsSupplemental' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false]
+            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
         ];
     }
 
@@ -203,7 +203,7 @@ class EarningsType extends Remote\Model
      * @param EarningsType $value
      * @return EarningsType
      */
-    public function setEarningsType(EarningsType $value)
+    public function setEarningsType(self $value)
     {
         $this->propertyUpdated('EarningsType', $value);
         $this->_data['EarningsType'] = $value;
@@ -422,6 +422,4 @@ class EarningsType extends Remote\Model
         $this->_data['Amount'] = $value;
         return $this;
     }
-
-
 }

@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS;
 
 use XeroPHP\Remote;
 
 class PaySchedule extends Remote\Model
 {
-
     /**
      * Name of the Pay Schedule
      *
@@ -89,7 +89,7 @@ class PaySchedule extends Remote\Model
     {
         return [
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -111,7 +111,7 @@ class PaySchedule extends Remote\Model
             'PaymentDate' => [true, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
             'StartDate' => [true, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
             'ScheduleType' => [true, self::PROPERTY_TYPE_ENUM, null, false, false],
-            'PayScheduleId' => [false, self::PROPERTY_TYPE_GUID, null, false, false]
+            'PayScheduleId' => [false, self::PROPERTY_TYPE_GUID, null, false, false],
         ];
     }
 
@@ -214,6 +214,4 @@ class PaySchedule extends Remote\Model
         $this->_data['PayScheduleId'] = $value;
         return $this;
     }
-
-
 }

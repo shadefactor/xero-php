@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Setting;
 
 use XeroPHP\Remote;
 
 class Account extends Remote\Model
 {
-
     /**
      * Xero account identifier. e.g c56b19ef-75bf-45e8-98a4-e699a96609f7
      *
@@ -102,7 +102,7 @@ class Account extends Remote\Model
             'AccountID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Type' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'Code' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Name' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'Name' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -186,6 +186,4 @@ class Account extends Remote\Model
         $this->_data['Name'] = $value;
         return $this;
     }
-
-
 }

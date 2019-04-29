@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS\Paystub;
 
 use XeroPHP\Remote;
 
 class EarningsLine extends Remote\Model
 {
-
     /**
      * Xero identifier for payroll earnings type.
      *
@@ -95,7 +95,7 @@ class EarningsLine extends Remote\Model
         return [
             'EarningsTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'RatePerUnit' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'NumberOfUnits' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false]
+            'NumberOfUnits' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false],
         ];
     }
 
@@ -158,12 +158,10 @@ class EarningsLine extends Remote\Model
     public function addNumberOfUnit($value)
     {
         $this->propertyUpdated('NumberOfUnits', $value);
-        if (!isset($this->_data['NumberOfUnits'])) {
+        if (! isset($this->_data['NumberOfUnits'])) {
             $this->_data['NumberOfUnits'] = new Remote\Collection();
         }
         $this->_data['NumberOfUnits'][] = $value;
         return $this;
     }
-
-
 }

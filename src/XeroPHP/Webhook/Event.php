@@ -2,8 +2,8 @@
 
 namespace XeroPHP\Webhook;
 
-use XeroPHP\Remote\Request;
 use XeroPHP\Remote\URL;
+use XeroPHP\Remote\Request;
 
 /**
  * Represents a single event within a webhook
@@ -60,12 +60,12 @@ class Event
             'eventType',
             'eventCategory',
             'tenantId',
-            'tenantType'
+            'tenantType',
         ];
 
         foreach ($fields as $required) {
-            if (!isset($event[$required])) {
-                throw new \XeroPHP\Application\Exception("The event payload was malformed; missing required field $required");
+            if (! isset($event[$required])) {
+                throw new \XeroPHP\Application\Exception("The event payload was malformed; missing required field {$required}");
             }
 
             $this->{$required} = $event[$required];
@@ -135,14 +135,14 @@ class Event
      */
     public function getEventClass()
     {
-        if ($this->getEventCategory() == 'INVOICE') {
+        if ($this->getEventCategory() === 'INVOICE') {
             return \XeroPHP\Models\Accounting\Invoice::class;
         }
-        if ($this->getEventCategory() == 'CONTACT') {
+        if ($this->getEventCategory() === 'CONTACT') {
             return \XeroPHP\Models\Accounting\Contact::class;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -170,7 +170,7 @@ class Event
      */
     public function getResource($application = null)
     {
-        if ($application == null) {
+        if ($application === null) {
             $application = $this->getWebhook()->getApplication();
         }
 
@@ -180,7 +180,7 @@ class Event
 
         foreach ($request->getResponse()->getElements() as $element) {
             $class = $this->getEventClass();
-            if ($class == null) {
+            if ($class === null) {
                 return $element;
             } else {
                 $model = new $class($application);

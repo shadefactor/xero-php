@@ -1,12 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Employee\PayTemplate;
 
 use XeroPHP\Remote;
 
 class SuperLine extends Remote\Model
 {
-
-
     /**
      * Xero superannuation fund membership identifier
      *
@@ -26,13 +25,13 @@ class SuperLine extends Remote\Model
      */
 
     /**
-     *  Account code for the Expense Account. i.e 478
+     *  Account code for the Expense Account. i.e 478
      *
      * @property string ExpenseAccountCode
      */
 
     /**
-     *  Account code for the Liability Account. i.e 826
+     *  Account code for the Liability Account. i.e 826
      *
      * @property string LiabilityAccountCode
      */
@@ -122,7 +121,7 @@ class SuperLine extends Remote\Model
             'ExpenseAccountCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'LiabilityAccountCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'MinimumMonthlyEarnings' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'Percentage' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false]
+            'Percentage' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
         ];
     }
 

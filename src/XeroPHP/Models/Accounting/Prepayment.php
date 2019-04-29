@@ -1,15 +1,17 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
+use XeroPHP\Traits\HistoryTrait;
 use XeroPHP\Traits\AttachmentTrait;
 use XeroPHP\Models\Accounting\Prepayment\LineItem;
 use XeroPHP\Models\Accounting\Prepayment\Allocation;
 
 class Prepayment extends Remote\Model
 {
-
     use AttachmentTrait;
+    use HistoryTrait;
 
     /**
      * This property has been removed from the Xero API
@@ -124,11 +126,11 @@ class Prepayment extends Remote\Model
 
 
     const TYPE_RECEIVE_PREPAYMENT = 'RECEIVE-PREPAYMENT';
-    const TYPE_SPEND_PREPAYMENT   = 'SPEND-PREPAYMENT';
+    const TYPE_SPEND_PREPAYMENT = 'SPEND-PREPAYMENT';
 
     const PREPAYMENT_STATUS_AUTHORISED = 'AUTHORISED';
-    const PREPAYMENT_STATUS_PAID       = 'PAID';
-    const PREPAYMENT_STATUS_VOIDED     = 'VOIDED';
+    const PREPAYMENT_STATUS_PAID = 'PAID';
+    const PREPAYMENT_STATUS_VOIDED = 'VOIDED';
 
 
     /**
@@ -182,7 +184,7 @@ class Prepayment extends Remote\Model
     {
         return [
             Remote\Request::METHOD_GET,
-            Remote\Request::METHOD_PUT
+            Remote\Request::METHOD_PUT,
         ];
     }
 
@@ -217,7 +219,7 @@ class Prepayment extends Remote\Model
             'CurrencyRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'RemainingCredit' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Allocations' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Prepayment\\Allocation', true, true],
-            'HasAttachments' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false]
+            'HasAttachments' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
         ];
     }
 
@@ -358,7 +360,7 @@ class Prepayment extends Remote\Model
     public function addLineItem(LineItem $value)
     {
         $this->propertyUpdated('LineItems', $value);
-        if (!isset($this->_data['LineItems'])) {
+        if (! isset($this->_data['LineItems'])) {
             $this->_data['LineItems'] = new Remote\Collection();
         }
         $this->_data['LineItems'][] = $value;
@@ -554,7 +556,7 @@ class Prepayment extends Remote\Model
     public function addAllocation(Allocation $value)
     {
         $this->propertyUpdated('Allocations', $value);
-        if (!isset($this->_data['Allocations'])) {
+        if (! isset($this->_data['Allocations'])) {
             $this->_data['Allocations'] = new Remote\Collection();
         }
         $this->_data['Allocations'][] = $value;
@@ -573,6 +575,7 @@ class Prepayment extends Remote\Model
      * @deprecated - this is a read only property and this method will be removed in future versions
      * @param $value
      */
-    public function setHasAttachment($value){}
-
+    public function setHasAttachment($value)
+    {
+    }
 }

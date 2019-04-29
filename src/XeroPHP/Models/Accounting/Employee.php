@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
@@ -6,7 +7,6 @@ use XeroPHP\Models\Accounting\Organisation\ExternalLink;
 
 class Employee extends Remote\Model
 {
-
     /**
      * Xero identifier
      *
@@ -34,7 +34,7 @@ class Employee extends Remote\Model
     /**
      * Link to an external resource, for example, an employee record in an external system. You can specify
      * the URL element.
-The description of the link is auto-generated in the form “Go to <App name>”.
+     * The description of the link is auto-generated in the form “Go to <App name>”.
      * <App name> refers to the Xero application name that is making the API call.
      *
      * @property ExternalLink ExternalLink
@@ -94,7 +94,7 @@ The description of the link is auto-generated in the form “Go to <App name>”
         return [
             Remote\Request::METHOD_POST,
             Remote\Request::METHOD_PUT,
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -116,7 +116,7 @@ The description of the link is auto-generated in the form “Go to <App name>”
             'Status' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'FirstName' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'LastName' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'ExternalLink' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Organisation\\ExternalLink', false, false]
+            'ExternalLink' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Organisation\\ExternalLink', false, false],
         ];
     }
 
@@ -219,6 +219,4 @@ The description of the link is auto-generated in the form “Go to <App name>”
         $this->_data['ExternalLink'] = $value;
         return $this;
     }
-
-
 }

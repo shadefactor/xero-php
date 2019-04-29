@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\Prepayment;
 
 use XeroPHP\Remote;
@@ -6,7 +7,6 @@ use XeroPHP\Models\Accounting\Invoice;
 
 class Allocation extends Remote\Model
 {
-
     /**
      * the invoice the prepayment is being allocated against
      *
@@ -97,7 +97,7 @@ class Allocation extends Remote\Model
         return [
             'Invoice' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Invoice', false, false],
             'AppliedAmount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'Date' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false]
+            'Date' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -162,6 +162,4 @@ class Allocation extends Remote\Model
         $this->_data['Date'] = $value;
         return $this;
     }
-
-
 }

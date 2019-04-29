@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\TrackingCategory;
 
 use XeroPHP\Remote;
 
 class TrackingOption extends Remote\Model
 {
-
     /**
      * The Xero identifier for a tracking optione.g. ae777a87-5ef3-4fa0-a4f0-d10e1f13073a
      *
@@ -95,7 +95,7 @@ class TrackingOption extends Remote\Model
         return [
             'TrackingOptionID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Name' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Status' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'Status' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -160,6 +160,4 @@ class TrackingOption extends Remote\Model
         $this->_data['Status'] = $value;
         return $this;
     }
-
-
 }

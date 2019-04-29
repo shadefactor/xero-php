@@ -1,13 +1,13 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU;
 
 use XeroPHP\Remote;
 
 class SuperFundProduct extends Remote\Model
 {
-
     /**
-     * The ABN of the Regulated SuperFund (e.g 40022701955)
+     * The ABN of the Regulated SuperFund (e.g 40022701955)
      *
      * @property string ABN
      */
@@ -84,7 +84,7 @@ class SuperFundProduct extends Remote\Model
     public static function getSupportedMethods()
     {
         return [
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -105,7 +105,7 @@ class SuperFundProduct extends Remote\Model
             'ABN' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'USI' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'SPIN' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'ProductName' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'ProductName' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -191,6 +191,4 @@ class SuperFundProduct extends Remote\Model
         $this->_data['ProductName'] = $value;
         return $this;
     }
-
-
 }

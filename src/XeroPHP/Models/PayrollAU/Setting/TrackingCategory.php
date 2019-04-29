@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Setting;
 
 use XeroPHP\Remote;
 
 class TrackingCategory extends Remote\Model
 {
-
     /**
      * Xero tracking category identifier. e.g c56b19ef-75bf-45e8-98a4-e699a96609f7
      *
@@ -88,7 +88,7 @@ class TrackingCategory extends Remote\Model
     {
         return [
             'TrackingCategoryID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'TrackingCategoryName' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'TrackingCategoryName' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -134,6 +134,4 @@ class TrackingCategory extends Remote\Model
         $this->_data['TrackingCategoryName'] = $value;
         return $this;
     }
-
-
 }

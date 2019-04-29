@@ -1,14 +1,16 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
+use XeroPHP\Traits\HistoryTrait;
 use XeroPHP\Traits\AttachmentTrait;
 use XeroPHP\Models\Accounting\Receipt\LineItem;
 
 class Receipt extends Remote\Model
 {
-
     use AttachmentTrait;
+    use HistoryTrait;
 
     /**
      * Date of receipt – YYYY-MM-DD
@@ -101,10 +103,10 @@ class Receipt extends Remote\Model
      */
 
 
-    const RECEIPT_STATUS_DRAFT      = 'DRAFT';
-    const RECEIPT_STATUS_SUBMITTED  = 'SUBMITTED';
+    const RECEIPT_STATUS_DRAFT = 'DRAFT';
+    const RECEIPT_STATUS_SUBMITTED = 'SUBMITTED';
     const RECEIPT_STATUS_AUTHORISED = 'AUTHORISED';
-    const RECEIPT_STATUS_DECLINED   = 'DECLINED';
+    const RECEIPT_STATUS_DECLINED = 'DECLINED';
 
 
     /**
@@ -159,7 +161,7 @@ class Receipt extends Remote\Model
         return [
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
-            Remote\Request::METHOD_POST
+            Remote\Request::METHOD_POST,
         ];
     }
 
@@ -191,7 +193,7 @@ class Receipt extends Remote\Model
             'ReceiptNumber' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
             'HasAttachments' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
-            'Url' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'Url' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -254,7 +256,7 @@ class Receipt extends Remote\Model
     public function addLineItem(LineItem $value)
     {
         $this->propertyUpdated('LineItems', $value);
-        if (!isset($this->_data['LineItems'])) {
+        if (! isset($this->_data['LineItems'])) {
             $this->_data['LineItems'] = new Remote\Collection();
         }
         $this->_data['LineItems'][] = $value;
@@ -402,7 +404,7 @@ class Receipt extends Remote\Model
         return $this->_data['Status'];
     }
 
-     public function setStatus($value)
+    public function setStatus($value)
     {
         $this->propertyUpdated('Status', $value);
         $this->_data['Status'] = $value;
@@ -443,7 +445,4 @@ class Receipt extends Remote\Model
     {
         return $this->_data['Url'];
     }
-
-
-
 }

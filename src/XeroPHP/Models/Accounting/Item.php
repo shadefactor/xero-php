@@ -1,12 +1,15 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
-use XeroPHP\Models\Accounting\Item\Purchase;
+use XeroPHP\Traits\HistoryTrait;
 use XeroPHP\Models\Accounting\Item\Sale;
+use XeroPHP\Models\Accounting\Item\Purchase;
 
 class Item extends Remote\Model
 {
+    use HistoryTrait;
 
     /**
      * Xero identifier
@@ -21,7 +24,7 @@ class Item extends Remote\Model
      */
 
     /**
-     * The inventory asset account for the item. The account must be of type INVENTORY. The 
+     * The inventory asset account for the item. The account must be of type INVENTORY. The
      * COGSAccountCode in PurchaseDetails is also required to create a tracked item
      *
      * @property string InventoryAssetAccountCode
@@ -153,7 +156,7 @@ class Item extends Remote\Model
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_DELETE
+            Remote\Request::METHOD_DELETE,
         ];
     }
 
@@ -184,7 +187,7 @@ class Item extends Remote\Model
             'IsTrackedAsInventory' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
             'TotalCostPool' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'QuantityOnHand' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false]
+            'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -478,6 +481,4 @@ class Item extends Remote\Model
         $this->_data['UpdatedDateUTC'] = $value;
         return $this;
     }
-
-
 }

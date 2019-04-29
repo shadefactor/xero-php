@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\Overpayment;
 
 use XeroPHP\Remote;
@@ -6,7 +7,6 @@ use XeroPHP\Models\Accounting\TrackingCategory;
 
 class LineItem extends Remote\Model
 {
-
     /**
      * Description needs to be at least 1 char long. A line item with just a description (i.e no unit
      * amount or quantity) can be created by specifying just a <Description> element that contains at least
@@ -139,7 +139,7 @@ class LineItem extends Remote\Model
             'TaxType' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'TaxAmount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'LineAmount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'Tracking' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\TrackingCategory', true, false]
+            'Tracking' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\TrackingCategory', true, false],
         ];
     }
 
@@ -219,7 +219,4 @@ class LineItem extends Remote\Model
     {
         return $this->_data['Tracking'];
     }
-
-
-
 }

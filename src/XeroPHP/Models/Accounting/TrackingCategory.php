@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
@@ -6,7 +7,6 @@ use XeroPHP\Models\Accounting\TrackingCategory\TrackingOption;
 
 class TrackingCategory extends Remote\Model
 {
-
     /**
      * The Xero identifier for a tracking categorye.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9
      *
@@ -92,7 +92,7 @@ class TrackingCategory extends Remote\Model
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_DELETE
+            Remote\Request::METHOD_DELETE,
         ];
     }
 
@@ -116,7 +116,7 @@ class TrackingCategory extends Remote\Model
             'TrackingOptionName' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Status' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Options' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\TrackingCategory\\TrackingOption', true, true],
-            'Option' => [false, self::PROPERTY_TYPE_STRING, null, false, true]
+            'Option' => [false, self::PROPERTY_TYPE_STRING, null, false, true],
         ];
     }
 
@@ -162,7 +162,7 @@ class TrackingCategory extends Remote\Model
         $this->_data['Name'] = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -236,7 +236,7 @@ class TrackingCategory extends Remote\Model
     public function addOption(TrackingOption $value)
     {
         $this->propertyUpdated('Options', $value);
-        if (!isset($this->_data['Options'])) {
+        if (! isset($this->_data['Options'])) {
             $this->_data['Options'] = new Remote\Collection();
         }
         $this->_data['Options'][] = $value;
@@ -262,6 +262,4 @@ class TrackingCategory extends Remote\Model
         $this->_data['Option'] = $value;
         return $this;
     }
-
-
 }

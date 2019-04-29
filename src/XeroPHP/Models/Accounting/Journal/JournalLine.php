@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\Journal;
 
 use XeroPHP\Remote;
@@ -7,7 +8,6 @@ use XeroPHP\Models\Accounting\TrackingCategory;
 
 class JournalLine extends Remote\Model
 {
-
     /**
      * Xero identifier
      *
@@ -160,7 +160,7 @@ class JournalLine extends Remote\Model
             'TaxAmount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'TaxType' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'TaxName' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\TaxRate', false, false],
-            'TrackingCategories' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\TrackingCategory', true, false]
+            'TrackingCategories' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\TrackingCategory', true, false],
         ];
     }
 
@@ -394,12 +394,10 @@ class JournalLine extends Remote\Model
     public function addTrackingCategory(TrackingCategory $value)
     {
         $this->propertyUpdated('TrackingCategories', $value);
-        if (!isset($this->_data['TrackingCategories'])) {
+        if (! isset($this->_data['TrackingCategories'])) {
             $this->_data['TrackingCategories'] = new Remote\Collection();
         }
         $this->_data['TrackingCategories'][] = $value;
         return $this;
     }
-
-
 }

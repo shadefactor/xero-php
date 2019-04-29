@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS\Employee;
 
 use XeroPHP\Remote;
 
 class SalaryAndWage extends Remote\Model
 {
-
     /**
      * This property has been removed from the Xero API
      *
@@ -131,7 +131,7 @@ class SalaryAndWage extends Remote\Model
             'HourlyRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'AnnualSalary' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'StandardHoursPerWeek' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'EffectiveDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false]
+            'EffectiveDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -293,6 +293,4 @@ class SalaryAndWage extends Remote\Model
         $this->_data['EffectiveDate'] = $value;
         return $this;
     }
-
-
 }

@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\Organisation;
 
 use XeroPHP\Remote;
 
 class Sale extends Remote\Model
 {
-
     /**
      * Day of Month (0-31)
      *
@@ -88,7 +88,7 @@ class Sale extends Remote\Model
     {
         return [
             'Day' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Type' => [false, self::PROPERTY_TYPE_ENUM, null, false, false]
+            'Type' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
         ];
     }
 
@@ -134,6 +134,4 @@ class Sale extends Remote\Model
         $this->_data['Type'] = $value;
         return $this;
     }
-
-
 }

@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
 
 class LinkedTransaction extends Remote\Model
 {
-
     /**
      * Filter by the SourceTransactionID. Get all the linked transactions created from a particular ACCPAY
      * invoice
@@ -76,11 +76,11 @@ class LinkedTransaction extends Remote\Model
      */
 
 
-    const LINKED_TRANSACTION_STATUS_DRAFT    = 'DRAFT';
+    const LINKED_TRANSACTION_STATUS_DRAFT = 'DRAFT';
     const LINKED_TRANSACTION_STATUS_APPROVED = 'APPROVED';
-    const LINKED_TRANSACTION_STATUS_ONDRAFT  = 'ONDRAFT';
-    const LINKED_TRANSACTION_STATUS_BILLED   = 'BILLED';
-    const LINKED_TRANSACTION_STATUS_VOIDED   = 'VOIDED';
+    const LINKED_TRANSACTION_STATUS_ONDRAFT = 'ONDRAFT';
+    const LINKED_TRANSACTION_STATUS_BILLED = 'BILLED';
+    const LINKED_TRANSACTION_STATUS_VOIDED = 'VOIDED';
 
 
     /**
@@ -136,7 +136,7 @@ class LinkedTransaction extends Remote\Model
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_DELETE
+            Remote\Request::METHOD_DELETE,
         ];
     }
 
@@ -163,7 +163,7 @@ class LinkedTransaction extends Remote\Model
             'Status' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Type' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
-            'SourceTransactionTypeCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'SourceTransactionTypeCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -361,6 +361,4 @@ class LinkedTransaction extends Remote\Model
         $this->_data['SourceTransactionTypeCode'] = $value;
         return $this;
     }
-
-
 }

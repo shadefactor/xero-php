@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Employee\PayTemplate;
 
 use XeroPHP\Remote;
 
 class ReimbursementLine extends Remote\Model
 {
-
     /**
      * Xero reimbursement type identifier
      *
@@ -93,7 +93,7 @@ class ReimbursementLine extends Remote\Model
         return [
             'ReimbursementTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Description' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false]
+            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false],
         ];
     }
 

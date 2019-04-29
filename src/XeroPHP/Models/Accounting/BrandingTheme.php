@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
 
 class BrandingTheme extends Remote\Model
 {
-
     /**
      * Xero identifier
      *
@@ -82,7 +82,7 @@ class BrandingTheme extends Remote\Model
     public static function getSupportedMethods()
     {
         return [
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -103,7 +103,7 @@ class BrandingTheme extends Remote\Model
             'BrandingThemeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Name' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'SortOrder' => [false, self::PROPERTY_TYPE_INT, null, false, false],
-            'CreatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false]
+            'CreatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -187,6 +187,4 @@ class BrandingTheme extends Remote\Model
         $this->_data['CreatedDateUTC'] = $value;
         return $this;
     }
-
-
 }

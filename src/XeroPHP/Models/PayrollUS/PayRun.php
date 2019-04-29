@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS;
 
 use XeroPHP\Remote;
 
 class PayRun extends Remote\Model
 {
-
     /**
      * Xero Identifier for the Pay Schedule
      *
@@ -131,7 +131,7 @@ class PayRun extends Remote\Model
     {
         return [
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -160,7 +160,7 @@ class PayRun extends Remote\Model
             'Reimbursement' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'NetPay' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'UpdateDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
-            'PayStubs' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'PayStubs' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -315,7 +315,4 @@ class PayRun extends Remote\Model
     {
         return $this->_data['PayStubs'];
     }
-
-
-
 }

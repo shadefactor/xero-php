@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Employee\PayTemplate;
 
 use XeroPHP\Remote;
 
 class DeductionLine extends Remote\Model
 {
-
     /**
      * Xero deduction type identifier
      *
@@ -100,7 +100,7 @@ class DeductionLine extends Remote\Model
             'DeductionTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'CalculationType' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'Percentage' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false]
+            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false],
         ];
     }
 

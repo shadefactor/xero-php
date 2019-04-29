@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\Organisation;
 
 use XeroPHP\Remote;
 
 class ExternalLink extends Remote\Model
 {
-
     /**
      * See External link types
      *
@@ -19,11 +19,11 @@ class ExternalLink extends Remote\Model
      */
 
 
-    const EXTERNAL_LINK_TYPE_FACEBOOK   = 'Facebook';
+    const EXTERNAL_LINK_TYPE_FACEBOOK = 'Facebook';
     const EXTERNAL_LINK_TYPE_GOOGLEPLUS = 'GooglePlus';
-    const EXTERNAL_LINK_TYPE_LINKEDIN   = 'LinkedIn';
-    const EXTERNAL_LINK_TYPE_TWITTER    = 'Twitter';
-    const EXTERNAL_LINK_TYPE_WEBSITE    = 'Website';
+    const EXTERNAL_LINK_TYPE_LINKEDIN = 'LinkedIn';
+    const EXTERNAL_LINK_TYPE_TWITTER = 'Twitter';
+    const EXTERNAL_LINK_TYPE_WEBSITE = 'Website';
 
 
     /**
@@ -94,7 +94,7 @@ class ExternalLink extends Remote\Model
     {
         return [
             'LinkType' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
-            'Url' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'Url' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -140,6 +140,4 @@ class ExternalLink extends Remote\Model
         $this->_data['Url'] = $value;
         return $this;
     }
-
-
 }

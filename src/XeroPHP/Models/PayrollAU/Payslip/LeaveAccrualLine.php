@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Payslip;
 
 use XeroPHP\Remote;
 
 class LeaveAccrualLine extends Remote\Model
 {
-
     /**
      * Xero identifier for the Leave type.
      *
@@ -95,7 +95,7 @@ class LeaveAccrualLine extends Remote\Model
         return [
             'LeaveTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'NumberOfUnits' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'AutoCalculate' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'AutoCalculate' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -160,6 +160,4 @@ class LeaveAccrualLine extends Remote\Model
         $this->_data['AutoCalculate'] = $value;
         return $this;
     }
-
-
 }

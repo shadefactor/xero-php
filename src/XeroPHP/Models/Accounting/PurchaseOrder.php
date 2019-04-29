@@ -1,16 +1,18 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
 use XeroPHP\Traits\PDFTrait;
+use XeroPHP\Traits\HistoryTrait;
 use XeroPHP\Traits\AttachmentTrait;
 use XeroPHP\Models\Accounting\PurchaseOrder\LineItem;
 
 class PurchaseOrder extends Remote\Model
 {
-
     use PDFTrait;
     use AttachmentTrait;
+    use HistoryTrait;
 
     /**
      * The PurchaseOrders endpoint does not create new contacts. You need to provide the ContactID or
@@ -162,11 +164,11 @@ class PurchaseOrder extends Remote\Model
      */
 
 
-    const PURCHASE_ORDER_STATUS_DRAFT      = 'DRAFT';
-    const PURCHASE_ORDER_STATUS_SUBMITTED  = 'SUBMITTED';
+    const PURCHASE_ORDER_STATUS_DRAFT = 'DRAFT';
+    const PURCHASE_ORDER_STATUS_SUBMITTED = 'SUBMITTED';
     const PURCHASE_ORDER_STATUS_AUTHORISED = 'AUTHORISED';
-    const PURCHASE_ORDER_STATUS_BILLED     = 'BILLED';
-    const PURCHASE_ORDER_STATUS_DELETED    = 'DELETED';
+    const PURCHASE_ORDER_STATUS_BILLED = 'BILLED';
+    const PURCHASE_ORDER_STATUS_DELETED = 'DELETED';
 
 
     /**
@@ -221,7 +223,7 @@ class PurchaseOrder extends Remote\Model
         return [
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
-            Remote\Request::METHOD_POST
+            Remote\Request::METHOD_POST,
         ];
     }
 
@@ -262,7 +264,7 @@ class PurchaseOrder extends Remote\Model
             'Total' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'TotalDiscount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'HasAttachments' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
-            'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false]
+            'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -306,7 +308,7 @@ class PurchaseOrder extends Remote\Model
     public function addLineItem(LineItem $value)
     {
         $this->propertyUpdated('LineItems', $value);
-        if (!isset($this->_data['LineItems'])) {
+        if (! isset($this->_data['LineItems'])) {
             $this->_data['LineItems'] = new Remote\Collection();
         }
         $this->_data['LineItems'][] = $value;
@@ -659,7 +661,4 @@ class PurchaseOrder extends Remote\Model
     {
         return $this->_data['UpdatedDateUTC'];
     }
-
-
-
 }

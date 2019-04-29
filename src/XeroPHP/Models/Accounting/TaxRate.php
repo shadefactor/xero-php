@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
@@ -6,7 +7,6 @@ use XeroPHP\Models\Accounting\TaxRate\TaxComponent;
 
 class TaxRate extends Remote\Model
 {
-
     /**
      * Name of tax rate
      *
@@ -80,8 +80,8 @@ class TaxRate extends Remote\Model
      */
 
 
-    const TAX_STATUS_ACTIVE   = 'ACTIVE';
-    const TAX_STATUS_DELETED  = 'DELETED';
+    const TAX_STATUS_ACTIVE = 'ACTIVE';
+    const TAX_STATUS_DELETED = 'DELETED';
     const TAX_STATUS_ARCHIVED = 'ARCHIVED';
 
 
@@ -137,7 +137,7 @@ class TaxRate extends Remote\Model
         return [
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
-            Remote\Request::METHOD_POST
+            Remote\Request::METHOD_POST,
         ];
     }
 
@@ -166,7 +166,7 @@ class TaxRate extends Remote\Model
             'CanApplyToLiabilities' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
             'CanApplyToRevenue' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
             'DisplayTaxRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'EffectiveRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false]
+            'EffectiveRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
         ];
     }
 
@@ -229,7 +229,7 @@ class TaxRate extends Remote\Model
     public function addTaxComponent(TaxComponent $value)
     {
         $this->propertyUpdated('TaxComponents', $value);
-        if (!isset($this->_data['TaxComponents'])) {
+        if (! isset($this->_data['TaxComponents'])) {
             $this->_data['TaxComponents'] = new Remote\Collection();
         }
         $this->_data['TaxComponents'][] = $value;
@@ -335,7 +335,4 @@ class TaxRate extends Remote\Model
     {
         return $this->_data['EffectiveRate'];
     }
-
-
-
 }

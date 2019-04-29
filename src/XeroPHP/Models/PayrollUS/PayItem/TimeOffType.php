@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS\PayItem;
 
 use XeroPHP\Remote;
 
 class TimeOffType extends Remote\Model
 {
-
     /**
      * Name of the time off type (max length = 50)
      *
@@ -15,7 +15,7 @@ class TimeOffType extends Remote\Model
     /**
      * Select Unpaid Time Off to indicate that an employee will not get paid when taking this time off
      * type.
-If Paid Time Off is selected the employee will get paid when taking this time off type and you
+     * If Paid Time Off is selected the employee will get paid when taking this time off type and you
      * can accrue the liability on the Balance Sheet
      *
      * @property string TimeOffCategory
@@ -121,7 +121,7 @@ If Paid Time Off is selected the employee will get paid when taking this time of
             'ExpenseAccountCode' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'LiabilityAccountCode' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'TimeOffTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'ShowBalanceToEmployee' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'ShowBalanceToEmployee' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -142,7 +142,7 @@ If Paid Time Off is selected the employee will get paid when taking this time of
      * @param TimeOffType $value
      * @return TimeOffType
      */
-    public function setTimeOffType(TimeOffType $value)
+    public function setTimeOffType(self $value)
     {
         $this->propertyUpdated('TimeOffType', $value);
         $this->_data['TimeOffType'] = $value;
@@ -243,6 +243,4 @@ If Paid Time Off is selected the employee will get paid when taking this time of
         $this->_data['ShowBalanceToEmployee'] = $value;
         return $this;
     }
-
-
 }

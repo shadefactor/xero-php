@@ -2,34 +2,34 @@
 
 namespace XeroPHP\Remote;
 
-use SimpleXMLElement;
 use XeroPHP\Helpers;
-use XeroPHP\Remote\Exception\BadRequestException;
-use XeroPHP\Remote\Exception\InternalErrorException;
-use XeroPHP\Remote\Exception\NotAvailableException;
+use SimpleXMLElement;
 use XeroPHP\Remote\Exception\NotFoundException;
-use XeroPHP\Remote\Exception\NotImplementedException;
-use XeroPHP\Remote\Exception\OrganisationOfflineException;
-use XeroPHP\Remote\Exception\RateLimitExceededException;
+use XeroPHP\Remote\Exception\BadRequestException;
+use XeroPHP\Remote\Exception\NotAvailableException;
 use XeroPHP\Remote\Exception\UnauthorizedException;
+use XeroPHP\Remote\Exception\InternalErrorException;
+use XeroPHP\Remote\Exception\NotImplementedException;
+use XeroPHP\Remote\Exception\RateLimitExceededException;
+use XeroPHP\Remote\Exception\OrganisationOfflineException;
 
 class Response
 {
-    const STATUS_OK                   = 200;
-    const STATUS_BAD_REQUEST          = 400;
-    const STATUS_UNAUTHORISED         = 401;
-    const STATUS_FORBIDDEN            = 403;
-    const STATUS_NOT_FOUND            = 404;
-    const STATUS_INTERNAL_ERROR       = 500;
-    const STATUS_NOT_IMPLEMENTED      = 501;
+    const STATUS_OK = 200;
+    const STATUS_BAD_REQUEST = 400;
+    const STATUS_UNAUTHORISED = 401;
+    const STATUS_FORBIDDEN = 403;
+    const STATUS_NOT_FOUND = 404;
+    const STATUS_INTERNAL_ERROR = 500;
+    const STATUS_NOT_IMPLEMENTED = 501;
 
     //Seriously, 1 code for 3 different things!
-    const STATUS_NOT_AVAILABLE        = 503;
-    const STATUS_RATE_LIMIT_EXCEEDED  = 503;
+    const STATUS_NOT_AVAILABLE = 503;
+    const STATUS_RATE_LIMIT_EXCEEDED = 503;
     const STATUS_ORGANISATION_OFFLINE = 503;
 
     private $request;
-
+    private $headers;
     private $status;
     private $content_type;
     private $response_body;
@@ -43,11 +43,12 @@ class Response
 
     private $root_error;
 
-    public function __construct(Request $request, $response_body, array $curl_info)
+    public function __construct(Request $request, $response_body, array $curl_info, $headers)
     {
         $this->request = $request;
         $this->response_body = $response_body;
         $this->status = $curl_info['http_code'];
+        $this->headers = $headers;
 
         list($this->content_type) = explode(';', $curl_info['content_type']);
     }
@@ -68,9 +69,9 @@ class Response
         $this->parseBody();
 
         switch ($this->status) {
-            case Response::STATUS_BAD_REQUEST:
+            case self::STATUS_BAD_REQUEST:
                 //This catches actual app errors
-                if (isset($this->root_error) && !empty($this->root_error)) {
+                if (isset($this->root_error) && ! empty($this->root_error)) {
                     $message = sprintf('%s (%s)', $this->root_error['message'], implode(', ', $this->element_errors));
                     $message .= $this->parseBadRequest();
                     throw new BadRequestException($message, $this->root_error['code']);
@@ -79,32 +80,37 @@ class Response
                 }
 
             /** @noinspection PhpMissingBreakStatementInspection */
-            case Response::STATUS_UNAUTHORISED:
+            // no break
+            case self::STATUS_UNAUTHORISED:
                 //This is where OAuth errors end up, this could maybe change to an OAuth exception
                 if (isset($this->oauth_response['oauth_problem_advice'])) {
                     throw new UnauthorizedException($this->oauth_response['oauth_problem_advice']);
                 }
-            case Response::STATUS_FORBIDDEN:
+                // no break
+            case self::STATUS_FORBIDDEN:
                 throw new UnauthorizedException();
 
-            case Response::STATUS_NOT_FOUND:
+            case self::STATUS_NOT_FOUND:
                 throw new NotFoundException();
 
-            case Response::STATUS_INTERNAL_ERROR:
+            case self::STATUS_INTERNAL_ERROR:
                 throw new InternalErrorException();
 
-            case Response::STATUS_NOT_IMPLEMENTED:
+            case self::STATUS_NOT_IMPLEMENTED:
                 throw new NotImplementedException();
 
-            case Response::STATUS_NOT_AVAILABLE:
-            case Response::STATUS_RATE_LIMIT_EXCEEDED:
-            case Response::STATUS_ORGANISATION_OFFLINE:
+            case self::STATUS_NOT_AVAILABLE:
+            case self::STATUS_RATE_LIMIT_EXCEEDED:
+            case self::STATUS_ORGANISATION_OFFLINE:
                 //There must be a better way than this?
                 $response = urldecode($this->response_body);
                 if (false !== stripos($response, 'Organisation is offline')) {
                     throw new OrganisationOfflineException();
                 } elseif (false !== stripos($response, 'Rate limit exceeded')) {
-                    throw new RateLimitExceededException();
+                    $problem = isset($this->headers['x-rate-limit-problem']) ? current($this->headers['x-rate-limit-problem']) : null;
+                    $exception = new RateLimitExceededException();
+                    $exception->setRateLimitProblem($problem);
+                    throw $exception;
                 } else {
                     throw new NotAvailableException();
                 }
@@ -116,7 +122,7 @@ class Response
      */
     private function parseBadRequest()
     {
-        if (!empty($this->elements)) {
+        if (! empty($this->elements)) {
             $field_errors = [];
             foreach ($this->elements as $n => $element) {
                 if (isset($element['ValidationErrors'])) {
@@ -137,7 +143,7 @@ class Response
     {
         return $this->status;
     }
-    
+
     public function getResponseBody()
     {
         return $this->response_body;
@@ -153,7 +159,7 @@ class Response
         if (isset($this->element_errors[$element_id])) {
             return $this->element_errors[$element_id];
         }
-        return null;
+        return;
     }
 
     public function getElementErrors()

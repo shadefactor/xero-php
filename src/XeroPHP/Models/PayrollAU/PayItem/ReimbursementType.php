@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\PayItem;
 
 use XeroPHP\Remote;
 
 class ReimbursementType extends Remote\Model
 {
-
     /**
      * Name of the reimbursement type (max length = 50)
      *
@@ -95,7 +95,7 @@ class ReimbursementType extends Remote\Model
         return [
             'Name' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'AccountCode' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
-            'ReimbursementTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'ReimbursementTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -160,6 +160,4 @@ class ReimbursementType extends Remote\Model
         $this->_data['ReimbursementTypeID'] = $value;
         return $this;
     }
-
-
 }

@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU;
 
 use XeroPHP\Remote;
 
 class PayRun extends Remote\Model
 {
-
     /**
      * See PayrollCalendars
      *
@@ -143,7 +143,7 @@ class PayRun extends Remote\Model
     {
         return [
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -174,7 +174,7 @@ class PayRun extends Remote\Model
             'Tax' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'Super' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Reimbursement' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'NetPay' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'NetPay' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -368,7 +368,4 @@ class PayRun extends Remote\Model
     {
         return $this->_data['NetPay'];
     }
-
-
-
 }

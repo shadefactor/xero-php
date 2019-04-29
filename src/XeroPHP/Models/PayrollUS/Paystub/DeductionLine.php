@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollUS\Paystub;
 
 use XeroPHP\Remote;
 
 class DeductionLine extends Remote\Model
 {
-
     /**
      * Xero identifier for payroll earnings type.
      *
@@ -102,7 +102,7 @@ class DeductionLine extends Remote\Model
             'DeductionTypeID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'CalculationType' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'Percentage' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false]
+            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
         ];
     }
 
@@ -186,6 +186,4 @@ class DeductionLine extends Remote\Model
         $this->_data['Amount'] = $value;
         return $this;
     }
-
-
 }

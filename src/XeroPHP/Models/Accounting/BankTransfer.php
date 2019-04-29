@@ -1,15 +1,17 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
+use XeroPHP\Traits\HistoryTrait;
 use XeroPHP\Traits\AttachmentTrait;
-use XeroPHP\Models\Accounting\BankTransfer\FromBankAccount;
 use XeroPHP\Models\Accounting\BankTransfer\ToBankAccount;
+use XeroPHP\Models\Accounting\BankTransfer\FromBankAccount;
 
 class BankTransfer extends Remote\Model
 {
-
     use AttachmentTrait;
+    use HistoryTrait;
 
     /**
      * See FromBankAccount
@@ -24,7 +26,7 @@ class BankTransfer extends Remote\Model
      */
 
     /**
-     * 
+     *
      *
      * @property string Amount
      */
@@ -124,7 +126,7 @@ class BankTransfer extends Remote\Model
     {
         return [
             Remote\Request::METHOD_GET,
-            Remote\Request::METHOD_PUT
+            Remote\Request::METHOD_PUT,
         ];
     }
 
@@ -151,7 +153,7 @@ class BankTransfer extends Remote\Model
             'FromBankTransactionID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'ToBankTransactionID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'HasAttachments' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
-            'CreatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false]
+            'CreatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -298,7 +300,4 @@ class BankTransfer extends Remote\Model
     {
         return $this->_data['CreatedDateUTC'];
     }
-
-
-
 }

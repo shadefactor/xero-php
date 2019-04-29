@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU\Payslip;
 
 use XeroPHP\Remote;
 
 class SuperannuationLine extends Remote\Model
 {
-
     /**
      * Xero identifier for payroll super fund membership ID
      *
@@ -137,7 +137,7 @@ class SuperannuationLine extends Remote\Model
             'LiabilityAccountCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'PaymentDateForThisPeriod' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
             'Percentage' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false]
+            'Amount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
         ];
     }
 
@@ -316,6 +316,4 @@ class SuperannuationLine extends Remote\Model
         $this->_data['Amount'] = $value;
         return $this;
     }
-
-
 }

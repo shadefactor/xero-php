@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Files;
 
 use XeroPHP\Remote;
 
 class File extends Remote\Model
 {
-
     /**
      * The name of the file
      *
@@ -110,7 +110,7 @@ class File extends Remote\Model
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_POST,
             Remote\Request::METHOD_PUT,
-            Remote\Request::METHOD_DELETE
+            Remote\Request::METHOD_DELETE,
         ];
     }
 
@@ -135,7 +135,7 @@ class File extends Remote\Model
             'CreatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
             'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
             'User' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'Id' => [false, self::PROPERTY_TYPE_GUID, null, false, false]
+            'Id' => [false, self::PROPERTY_TYPE_GUID, null, false, false],
         ];
     }
 
@@ -295,6 +295,4 @@ class File extends Remote\Model
         $this->_data['Id'] = $value;
         return $this;
     }
-
-
 }

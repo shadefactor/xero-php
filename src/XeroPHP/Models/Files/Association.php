@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Files;
 
 use XeroPHP\Remote;
 
 class Association extends Remote\Model
 {
-
     /**
      * The identifier of the object that the file is being associated with (e.g. InvoiceID,
      * BankTransactionID, ContactID)
@@ -80,7 +80,7 @@ class Association extends Remote\Model
         return [
             Remote\Request::METHOD_POST,
             Remote\Request::METHOD_GET,
-            Remote\Request::METHOD_DELETE
+            Remote\Request::METHOD_DELETE,
         ];
     }
 
@@ -100,7 +100,7 @@ class Association extends Remote\Model
         return [
             'ObjectId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'ObjectGroup' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
-            'ObjectType' => [true, self::PROPERTY_TYPE_ENUM, null, false, false]
+            'ObjectType' => [true, self::PROPERTY_TYPE_ENUM, null, false, false],
         ];
     }
 
@@ -165,6 +165,4 @@ class Association extends Remote\Model
         $this->_data['ObjectType'] = $value;
         return $this;
     }
-
-
 }

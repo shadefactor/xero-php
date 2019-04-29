@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting\Item;
 
 use XeroPHP\Remote;
 
 class Sale extends Remote\Model
 {
-
     /**
      * Unit Price of the item. By default UnitPrice is rounded to two decimal places. You can use 4 decimal
      * places by adding the unitdp=4 querystring parameter to your request.
@@ -113,7 +113,7 @@ class Sale extends Remote\Model
             'AccountCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'COGSAccountCode' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
-            'TaxType' => [false, self::PROPERTY_TYPE_ENUM, null, false, false]
+            'TaxType' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
         ];
     }
 
@@ -218,6 +218,4 @@ class Sale extends Remote\Model
         $this->_data['TaxType'] = $value;
         return $this;
     }
-
-
 }

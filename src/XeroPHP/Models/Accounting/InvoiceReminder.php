@@ -1,12 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Accounting;
 
 use XeroPHP\Remote;
 
-class InvoiceReminder extends Remote\Object
+class InvoiceReminder extends Remote\Model
 {
-
-
     /**
      * Boolean to set when InvocieReminders are turned on in Xero
      *
@@ -63,7 +62,7 @@ class InvoiceReminder extends Remote\Object
     public static function getSupportedMethods()
     {
         return [
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -81,7 +80,7 @@ class InvoiceReminder extends Remote\Object
     public static function getProperties()
     {
         return [
-            'Enabled' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false]
+            'Enabled' => [false, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
         ];
     }
 
@@ -90,7 +89,7 @@ class InvoiceReminder extends Remote\Object
         return false;
     }
 
- 
+
     /**
      * @return bool
      */
@@ -98,5 +97,4 @@ class InvoiceReminder extends Remote\Object
     {
         return $this->_data['Enabled'];
     }
-
 }

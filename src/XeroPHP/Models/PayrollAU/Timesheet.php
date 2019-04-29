@@ -1,4 +1,5 @@
 <?php
+
 namespace XeroPHP\Models\PayrollAU;
 
 use XeroPHP\Remote;
@@ -6,7 +7,6 @@ use XeroPHP\Models\PayrollAU\Timesheet\TimesheetLine;
 
 class Timesheet extends Remote\Model
 {
-
     /**
      * The Xero identifier for an employee
      *
@@ -50,9 +50,9 @@ class Timesheet extends Remote\Model
      */
 
 
-    const STATUS_DRAFT     = 'DRAFT';
+    const STATUS_DRAFT = 'DRAFT';
     const STATUS_PROCESSED = 'PROCESSED';
-    const STATUS_APPROVED  = 'APPROVED';
+    const STATUS_APPROVED = 'APPROVED';
 
 
     /**
@@ -106,7 +106,7 @@ class Timesheet extends Remote\Model
     {
         return [
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_GET
+            Remote\Request::METHOD_GET,
         ];
     }
 
@@ -130,7 +130,7 @@ class Timesheet extends Remote\Model
             'TimesheetLines' => [false, self::PROPERTY_TYPE_OBJECT, 'PayrollAU\\Timesheet\\TimesheetLine', true, false],
             'Status' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'Hours' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'TimesheetID' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'TimesheetID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -212,7 +212,7 @@ class Timesheet extends Remote\Model
     public function addTimesheetLine(TimesheetLine $value)
     {
         $this->propertyUpdated('TimesheetLines', $value);
-        if (!isset($this->_data['TimesheetLines'])) {
+        if (! isset($this->_data['TimesheetLines'])) {
             $this->_data['TimesheetLines'] = new Remote\Collection();
         }
         $this->_data['TimesheetLines'][] = $value;
@@ -275,6 +275,4 @@ class Timesheet extends Remote\Model
         $this->_data['TimesheetID'] = $value;
         return $this;
     }
-
-
 }

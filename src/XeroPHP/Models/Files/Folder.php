@@ -1,11 +1,11 @@
 <?php
+
 namespace XeroPHP\Models\Files;
 
 use XeroPHP\Remote;
 
 class Folder extends Remote\Model
 {
-
     /**
      * The name of the folder
      *
@@ -105,7 +105,7 @@ class Folder extends Remote\Model
             Remote\Request::METHOD_GET,
             Remote\Request::METHOD_PUT,
             Remote\Request::METHOD_POST,
-            Remote\Request::METHOD_DELETE
+            Remote\Request::METHOD_DELETE,
         ];
     }
 
@@ -129,7 +129,7 @@ class Folder extends Remote\Model
             'IsInbox' => [true, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
             'Id' => [true, self::PROPERTY_TYPE_GUID, null, false, false],
             'Files' => [true, self::PROPERTY_TYPE_OBJECT, 'Files\\File', true, false],
-            'FolderId' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'FolderId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -249,7 +249,7 @@ class Folder extends Remote\Model
     public function addFile(File $value)
     {
         $this->propertyUpdated('Files', $value);
-        if (!isset($this->_data['Files'])) {
+        if (! isset($this->_data['Files'])) {
             $this->_data['Files'] = new Remote\Collection();
         }
         $this->_data['Files'][] = $value;
@@ -274,6 +274,4 @@ class Folder extends Remote\Model
         $this->_data['FolderId'] = $value;
         return $this;
     }
-
-
 }
